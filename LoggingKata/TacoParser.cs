@@ -40,20 +40,9 @@ namespace LoggingKata
                 return null;
             }
 
-            if (Math.Abs(lon) <= 180 && Math.Abs(lat) <= 90)
-            {
-                return cells;
-            }
-            else
-            {
-                return null;
-            }
-
-/*
-            var tacoBell = new TacoBell();
+            var tacoBell = new TacoBell(lon, lat, name);
 
             return tacoBell;
-*/
         }
     }
 }
