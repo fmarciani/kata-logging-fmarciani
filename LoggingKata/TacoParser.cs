@@ -26,11 +26,13 @@ namespace LoggingKata
 
             // Location name should be in cell index 2. Parse lat and lon as doubles.
             var name = cells[2];
+            double lon;
+            double lat;
 
             try
             {
-                var lon = Convert.ToDouble(cells[0]);
-                var lat = Convert.ToDouble(cells[1]);
+                lon = Convert.ToDouble(cells[0]);
+                lat = Convert.ToDouble(cells[1]);
             }
             catch (Exception)
             {
@@ -38,7 +40,20 @@ namespace LoggingKata
                 return null;
             }
 
-           return null; 
+            if (Math.Abs(lon) <= 180 && Math.Abs(lat) <= 90)
+            {
+                return cells;
+            }
+            else
+            {
+                return null;
+            }
+
+/*
+            var tacoBell = new TacoBell();
+
+            return tacoBell;
+*/
         }
     }
 }
