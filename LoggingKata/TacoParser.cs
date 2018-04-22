@@ -13,7 +13,7 @@ namespace LoggingKata
         public ITrackable Parse(string line)
         {
             Logger.LogInfo("Begin parsing");
-
+            
             // Read line, split it by comma into string array.
             var cells = line.Split(',');
 
@@ -29,19 +29,16 @@ namespace LoggingKata
 
             try
             {
-                var lon = Double.Parse(cells[0]);
-                var lat = Double.Parse(cells[1]);
+                var lon = Convert.ToDouble(cells[0]);
+                var lat = Convert.ToDouble(cells[1]);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Logger.LogWarning("Could not parse coordinates.");
                 return null;
             }
 
-            // 
-
-            //DO not fail if one record parsing fails, return null
-            return null; //TODO Implement
+           return null; 
         }
     }
 }

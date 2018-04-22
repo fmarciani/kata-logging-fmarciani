@@ -8,7 +8,7 @@ namespace LoggingKata.Test
     public class TacoParserTests
     {
         [Theory]
-        [InlineData("170.05, 56.78, Auburn")] // Should parse (longitude, latitude, location).
+        [InlineData("-86.889051, 33.556383, Taco Bell Birmingham")] // Should parse (longitude, latitude, location).
         public void ShouldParse(string str)
         {
             // Arrange
