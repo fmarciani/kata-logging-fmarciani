@@ -1,13 +1,14 @@
 using System;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Xunit;
+using LoggingKata;
 
 namespace LoggingKata.Test
 {
     public class TacoParserTests
     {
         [Theory]
-        [InlineData("170.05, 56.78, Auburn AL")] // Should parse (longitude, latitude, location).
+        [InlineData("170.05, 56.78, Auburn")] // Should parse (longitude, latitude, location).
         public void ShouldParse(string str)
         {
             // Arrange
@@ -17,7 +18,7 @@ namespace LoggingKata.Test
             var result = parser.Parse(str);
 
             // Assert
-            Assert.IsNotNull(result, $"{result} failed to parse.");
+            Assert.NotNull(result, $"{result} should parse.");
         }
 
         [Theory]
@@ -38,7 +39,7 @@ namespace LoggingKata.Test
             var result = parser.Parse(str);
 
             // Assert
-            Assert.IsNull(result, $"{result} should parse.");
+            Assert.Null(result, $"{result} failed to parse.");
         }
     }
 }
