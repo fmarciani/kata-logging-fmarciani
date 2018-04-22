@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingKata", "LoggingKata\LoggingKata.csproj", "{7ADECD8F-C2B8-437F-9BCD-80CA280CB46F}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D12AA5B6-2F62-4BF2-8080-0C276FC1177C} = {D12AA5B6-2F62-4BF2-8080-0C276FC1177C}
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingKata.Test", "LoggingKata.Test\LoggingKata.Test.csproj", "{D12AA5B6-2F62-4BF2-8080-0C276FC1177C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7ADECD8F-C2B8-437F-9BCD-80CA280CB46F} = {7ADECD8F-C2B8-437F-9BCD-80CA280CB46F}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

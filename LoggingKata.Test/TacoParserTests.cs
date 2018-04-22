@@ -18,7 +18,7 @@ namespace LoggingKata.Test
             var result = parser.Parse(str);
 
             // Assert
-            Assert.NotNull(result, $"{result} should parse.");
+            Assert.NotNull(result);
         }
 
         [Theory]
@@ -39,7 +39,7 @@ namespace LoggingKata.Test
             var result = parser.Parse(str);
 
             // Assert
-            Assert.Null(result, $"{result} failed to parse.");
+            Assert.Null(result);
         }
     }
 }
