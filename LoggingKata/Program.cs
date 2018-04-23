@@ -75,7 +75,7 @@ namespace LoggingKata
                 }
             }
 
-            Console.WriteLine($"The largest distance in the state is between {locA.Name} and {locB.Name}, at {distance} meters.");
+            Console.WriteLine($"The largest distance in the data is between {locA.Name} and {locB.Name}, at {distance} meters.");
             Console.ReadLine();
         }
     }

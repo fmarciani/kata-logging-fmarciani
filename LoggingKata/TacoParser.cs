@@ -26,7 +26,10 @@ namespace LoggingKata
 
             // Location name should be in cell index 2. Parse lat and lon as doubles.
             Logger.LogInfo("Parsing location");
-            var name = cells[2];
+            var uneditedName = cells[2];
+
+            // Remove all characters in location cell beginning with char "(".
+            var name = uneditedName.Remove(uneditedName.IndexOf('('));
 
             double lon;
             double lat;
@@ -51,7 +54,8 @@ namespace LoggingKata
                 return null;
             }
 
-            return new TacoBell { Location = new Point { Longitude = lon, Latitude = lat }, Name = name };
+            var tacoBell = new TacoBell { Location = new Point { Longitude = lon, Latitude = lat }, Name = name };
+            return tacoBell;
         }
     }
 }
