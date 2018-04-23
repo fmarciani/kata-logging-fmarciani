@@ -12,15 +12,15 @@ namespace LoggingKata
         
         public ITrackable Parse(string line)
         {
-            Logger.LogInfo("Begin parsing");
+            Logger.LogInfo("Begin parsing ...");
             
             // Read line, split it by comma into string array.
             var cells = line.Split(',');
 
-            // If the length of the array != 3, return null.
-            if (cells.Length != 3)
+            // If the length of the array < 3, return null.
+            if (cells.Length <= 3)
             {
-                Logger.LogWarning("Line entry with fewer than three cells found.");
+                Logger.LogError("Line entry has fewer than 3 cells.");
                 return null;
             }
 
@@ -31,16 +31,19 @@ namespace LoggingKata
 
             try
             {
-                lon = Convert.ToDouble(cells[0]);
-                lat = Convert.ToDouble(cells[1]);
+                Logger.LogInfo("Parsing longitude ...");
+                lon = double.Parse(cells[0]);
+
+                Logger.LogInfo("Parsing latitude ...");
+                lat = double.Parse(cells[1]);
             }
             catch (Exception)
             {
-                Logger.LogWarning("Could not parse coordinates.");
+                Logger.LogError("Could not parse coordinates.");
                 return null;
             }
 
-            var tacoBell = new TacoBell(lon, lat, name);
+            var tacoBell = new TacoBell() { Location = new Point(), Name = name };
 
             return tacoBell;
         }
