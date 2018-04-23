@@ -15,7 +15,6 @@ namespace LoggingKata
         static void Main(string[] args)
         {
             Logger.LogInfo("Log initialized");
-            //var csvPath = Environment.CurrentDirectory + "\\TacoBell-US-AL.csv";
 
             Logger.LogInfo("Reading lines");
             var lines = File.ReadAllLines(csvPath);
@@ -39,7 +38,6 @@ namespace LoggingKata
 
             // Grab IEnumerable of locations.
             var locations = lines.Select(line => parser.Parse(line)).ToArray();
-            //var locations = lines.Select(line => parser.Parse(line));
 
             // Create two ITrackable variables to store Taco Bell locations.
             ITrackable locA = null;
@@ -48,24 +46,30 @@ namespace LoggingKata
             // Create a variable to store the distance between two Taco Bell locations.
             double distance = 0.00;
 
-            // TODO:  Find the two TacoBells in Alabama that are the furthurest from one another.
-            // HINT:  You'll need two nested forloops
-
+            // For each location in locations: 
             foreach (var loc1 in locations)
             {
+                // Grab each location as the origin; store the latitude and longitude in coordinate variable.
                 var corA = new GeoCoordinate
                 {
                     Longitude = loc1.Location.Longitude,
                     Latitude = loc1.Location.Latitude
                 };
+                // Within this loop:
                 foreach (var loc2 in locations)
                 {
+                    // Grab another location as the destination; store the latitude and longitude in coordinate variable.
                     var corB = new GeoCoordinate
                     {
                         Longitude = loc2.Location.Longitude,
                         Latitude = loc2.Location.Latitude
                     };
+                    
+                    // Make a new variable to store the distance between the origin and the destination point.
                     var dist = corA.GetDistanceTo(corB);
+
+                    /* If the distance between the origin and destination is greater than the var distance outside the
+                     scope, adjust the var distance. Also adjust the coordinate variables outside of the scope. */
                     if (dist > distance)
                     {
                         locA = loc1;
@@ -75,6 +79,7 @@ namespace LoggingKata
                 }
             }
 
+            // Print out the two Taco Bells farthest apart from one another in the .csv file, and the distance in meters.
             Console.WriteLine($"The largest distance in the data is between {locA.Name} and {locB.Name}, at {distance} meters.");
             Console.ReadLine();
         }
