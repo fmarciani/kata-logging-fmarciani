@@ -45,15 +45,13 @@ namespace LoggingKata
                     return null;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                Logger.LogError("Could not parse coordinates.");
+                Logger.LogError("Could not parse coordinates.", e);
                 return null;
             }
 
-            var tacoBell = new TacoBell { Location = new Point { Longitude = lon, Latitude = lat }, Name = name };
-
-            return tacoBell;
+            return new TacoBell { Location = new Point { Longitude = lon, Latitude = lat }, Name = name };
         }
     }
 }
