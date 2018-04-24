@@ -24,8 +24,7 @@ namespace LoggingKata.Test
         [Theory]
         [InlineData(null)] // Cannot parse null input.
         [InlineData("")] // Cannot parse empty strings.
-        [InlineData("1234, 1234")] // Cannot parse arrays of length < 3.
-        [InlineData("1234, 1234, Location, Other")] // Cannot parse arrays of Length > 3.
+        [InlineData("1234, 1234")] // Cannot parse arrays of length < 2.
         [InlineData("ABCD, 1234, Location")] // Longitude must have numeric entry.  
         [InlineData("1234, ABCD, Location")] // Latitude must have numeric entry.
         [InlineData("-190.05, 85.50, Location")] // Longitude out of range.
