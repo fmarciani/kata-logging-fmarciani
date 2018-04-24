@@ -1,18 +1,61 @@
-﻿namespace LoggingKata
+﻿using System;
+using System.IO;
+
+namespace LoggingKata
 {
     /// <summary>
     /// Parses a POI file to locate all the TacoBells
     /// </summary>
     public class TacoParser
     {
-        readonly ILog logger = new TacoLogger();
-        
+        public readonly ILog Logger = new TacoLogger();
+
         public ITrackable Parse(string line)
         {
-            logger.LogInfo("Begin parsing");
+            // Logger.LogInfo("Begin parsing");
 
-            //DO not fail if one record parsing fails, return null
-            return null; //TODO Implement
+            if (string.IsNullOrEmpty(line))
+            {
+                Logger.LogError("Empty line detected.");
+                return null;
+            }
+
+            var cells = line.Split(',');
+
+            if (cells.Length < 2)
+            {
+                Logger.LogError("Input failed to parse.");
+                return null;
+            }
+
+            // Logger.LogInfo("Parsing location");
+
+            var name = cells.Length > 2 ? cells[2] : "";
+            var promoIndex = name.IndexOf('(');
+            name = promoIndex > 0 ? name.Remove(promoIndex) : name;
+
+            try
+            {
+                // Logger.LogInfo("Parsing longitude");
+                var lon = double.Parse(cells[0]);
+
+                // Logger.LogInfo("Parsing latitude");
+                var lat = double.Parse(cells[1]);
+
+                if (Math.Abs(lon) > Point.MaxLong || Math.Abs(lat) > Point.MaxLat)
+                {
+                    Logger.LogError("Longitude or latitude out of range.");
+                    return null;
+                }
+
+                var point = new Point { Longitude = lon, Latitude = lat };
+                return new TacoBell { Location = point, Name = name };
+            }
+            catch (Exception e)
+            {
+                Logger.LogError("Could not parse coordinates.", e);
+                return null;
+            }
         }
     }
 }
