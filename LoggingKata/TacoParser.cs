@@ -32,16 +32,13 @@ namespace LoggingKata
 
             var name = cells[2];
 
-            double lon;
-            double lat;
-
             try
             {
                 Logger.LogInfo("Parsing longitude");
-                lon = double.Parse(cells[0]);
+                var lon = double.Parse(cells[0]);
 
                 Logger.LogInfo("Parsing latitude");
-                lat = double.Parse(cells[1]);
+                var lat = double.Parse(cells[1]);
 
                 if (Math.Abs(lon) > 180 || Math.Abs(lat) > 90)
                 {
@@ -49,8 +46,8 @@ namespace LoggingKata
                     return null;
                 }
 
-                var tacoBell = new TacoBell {Location = new Point {Longitude = lon, Latitude = lat}, Name = name};
-                return tacoBell;
+                var point = new Point {Longitude = lon, Latitude = lat};
+                return new TacoBell { Location = point, Name = name };
             }
             catch (Exception e)
             {
